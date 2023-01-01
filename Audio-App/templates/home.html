@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+    <form method="post" action="/" enctype="multipart/form-data" class="fileselect">
+
+        <input type="file" id="file" class="file-input" name="file">
+        <label for="file" class="file-label">Select a File</label>
+        <p class="filename">No file selected</p>
+        <input type="submit" value="Submit" class="submit">
+
+    </form>
+
+    {% if fpath is not none %}
+    
+        <div class="audio_container">
+            <h2 class="playing">Audio Clip Playing: </h2>
+            <div class="loader">
+                <span class="stroke"></span>
+                <span class="stroke"></span>
+                <span class="stroke"></span>
+                <span class="stroke"></span>
+                <span class="stroke"></span>
+                <span class="stroke"></span>
+                <span class="stroke"></span>
+            </div>
+            <div id="audio_player"></div>
+            <div class="buttons">
+                <button class="play-icon paused">
+                    <img src="/static/images/play-buttton.png" class="play">
+                    <img src="/static/images/pause-button.png" class="pause">
+                </button>
+                <button class="add">
+                    <img src="/static/images/plus-symbol-button.png">
+                </button>
+                <button class="remove disabled" disabled>
+                    <img src="/static/images/close-button.png">
+                </button>
+            </div>
+            <div class="addRegion">
+                <button class="addRegion">Save</button>
+            </div>
+
+            <div class="segmentation">
+                <button class="segmentation">Run Segmentation</button>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            const fpath = "{{ fpath }}"
+            let regions = "{{ regions }}"
+        </script>
+
+    {% else %}
+        <script type="text/javascript">
+            fpath = null
+            regions = null
+        </script>
+
+
+    {% endif %}
+    
+    
+
+{% endblock content %}
